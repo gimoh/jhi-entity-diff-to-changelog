@@ -11,7 +11,7 @@ function readEntities(dir) {
 
   fs.readdirSync(dir).forEach(file => {
     const entityName = file.slice(0, file.length - 5);
-    console.log(`read: dir: ${dir}, file: ${file}, entityName: ${entityName}`);
+    // console.log(`read: dir: ${dir}, file: ${file}, entityName: ${entityName}`);
     entities[entityName] = jhiCore.readEntityJSON(`${dir}/${file}`);
   });
 
@@ -33,7 +33,7 @@ function templatePath(fn) {
 function template(source, destination, generator, options = {}, context) {
   const _context = generator || context;
 
-  console.log(`render ${source} to ${destinationPath(destination)}`)
+  // console.log(`render ${source} to ${destinationPath(destination)}`)
   ejs.renderFile(templatePath(source), generator, options, (err, res) => {
     if(!err) {
       fs.writeFileSync(destinationPath(destination), res);
