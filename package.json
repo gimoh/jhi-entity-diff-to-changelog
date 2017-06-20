@@ -5,5 +5,8 @@
   "main": "index.js",
   "repository": "https://github.com/gimoh/jhi-entity-diff-to-changelog",
   "author": "gimoh <gimoh@bitmessage.ch>",
-  "license": "Apache 2.0"
+  "license": "Apache 2.0",
+  "dependencies": {
+    "fast-json-patch": "^2.0.2"
+  }
 }
