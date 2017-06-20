@@ -6,7 +6,7 @@ POC implementation for jhipster/generator-jhipster#5954
 
 - clone a JHipster sample app
 - add this module
-- snapshot `.jhipster` directory
+- snapshot `.jhipster` directory (for now just `cp -a .jhipster .jhipster.prev`)
 - add a string column to `BankAccount` entity
 - choose to overwrite all files except `src/main/resources/config/liquibase/changelog/20150805124838_added_entity_BankAccount.xml`
 - run `./node_modules/.bin/jhi-entity-diff-to-changelog .jhipster.prev .jhipster`
