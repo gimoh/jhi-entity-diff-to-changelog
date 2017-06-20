@@ -4,6 +4,7 @@ const ejs = require('ejs');
 const fs = require('fs');
 const jhiCore = require('jhipster-core');
 const jsonpatch = require('fast-json-patch');
+const path = require('path');
 
 function readEntities(dir) {
   let entities = {};
@@ -17,6 +18,14 @@ function readEntities(dir) {
   return entities;
 }
 
+function destinationPath(fn) {
+  return path.resolve(fn);
+}
+
+function templatePath(fn) {
+  return path.resolve(__dirname, fn)
+}
+
 /**
  * Process template
  * TODO: use generator's `this.template`
@@ -24,9 +33,12 @@ function readEntities(dir) {
 function template(source, destination, generator, options = {}, context) {
   const _context = generator || context;
 
-  ejs.renderFile(source, generator, options, (err, res) => {
+  console.log(`render ${source} to ${destinationPath(destination)}`)
+  ejs.renderFile(templatePath(source), generator, options, (err, res) => {
     if(!err) {
-      fs.writeFileSync(destination, res);
+      fs.writeFileSync(destinationPath(destination), res);
+    } else {
+      console.log(`ERROR: ${err}`)
     }
   })
 }
@@ -45,7 +57,7 @@ function generateLiquibaseChangelog(beforeDir, afterDir) {
   // console.log(`afterEntities: ${JSON.stringify(afterEntities, null, 2)}`);
   console.log(`diff: ${JSON.stringify(entitiesDiff, null, 2)}`);
 
-  template('liquibase_changelog.xml', 'rendered_liquibase_changelog.xml', generator)
+  template('liquibase_changelog.xml', 'src/main/resources/config/liquibase/changelog/rendered_liquibase_changelog.xml', generator)
 }
 
 function main() {
