@@ -1,0 +1,9 @@
+{
+  "name": "jhi-entity-diff-to-changelog",
+  "version": "0.0.0",
+  "description": "POC for JHipster generating liquibase changelogs based on entity json diffs",
+  "main": "index.js",
+  "repository": "https://github.com/gimoh/jhi-entity-diff-to-changelog",
+  "author": "gimoh <gimoh@bitmessage.ch>",
+  "license": "Apache 2.0"
+}
