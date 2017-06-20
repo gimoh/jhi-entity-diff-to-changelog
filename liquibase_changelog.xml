@@ -13,6 +13,10 @@
           let path = diff[idx].path.split('/');
           let entityName = path[1];
           let prop = path[2];
+          // TODO need to also handle `relationships` and `entityTableName` (?)
+          if (prop !== 'fields') {
+            continue
+          }
           console.log(`path: ${path} -> entityName: ${entityName}, prop: ${prop}`);
           let tableName = entities[entityName].entityTableName;
           const columnName = diff[idx].value.fieldName;
