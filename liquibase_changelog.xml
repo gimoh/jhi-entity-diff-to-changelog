@@ -1,0 +1,35 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="gimoh (generated)" id="1497953691541-1">
+        <% for (idx in diff) {
+          // TODO: reuse code from `_added_entity.xml` template
+          let liquibaseOp;
+          // path is e.g. /Entity/fields/1
+          let path = diff[idx].path.split('/');
+          let entityName = path[1];
+          let prop = path[2];
+          console.log(`path: ${path} -> entityName: ${entityName}, prop: ${prop}`);
+          let tableName = entities[entityName].entityTableName;
+          const columnName = diff[idx].value.fieldName;
+          const fieldType = diff[idx].value.fieldType;
+          let columnType;
+          let maxlength = 255;
+          if (fieldType === 'String') {
+            columnType = "varchar(" + maxlength + ")";
+          }
+
+          if (prop === 'fields' && diff[idx].op === 'add') {
+            liquibaseOp = 'addColumn';
+          }
+        %>
+        <<%= liquibaseOp %> tableName="<%= tableName %>">
+            <column name="<%= columnName %>" type="<%= columnType %>"/>
+        </<%= liquibaseOp %>>
+        <% } %>
+    </changeSet>
+</databaseChangeLog>
